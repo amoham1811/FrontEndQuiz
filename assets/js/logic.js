@@ -14,6 +14,8 @@ var counter = 0
 var feedback = '';
 var quizScore = 0;
 var timeLeft = 0
+var correctSound = new Audio('../sfx/correct.wav');
+var incorrectSound = new Audio('../sfx/incorrect.wav');
 
 function displayResult() {
     questionElement.setAttribute("class","hide");
@@ -125,9 +127,11 @@ questionElement.addEventListener("click",function(event){
         //alert(element);
         if (element.matches("button")==true) {
         if (element.textContent[0] === Object.values(questions[counter])[5][0]){
+                correctSound.play();
                 feedback = "Well done! That was the correct answer";
                 quizScore++;
         }else {
+                incorrectSound.play();
                 feedback = "Incorrect! "+ Object.values(questions[counter])[5].substring(2,) ;
                 timeLeft -= 10;
         } 
